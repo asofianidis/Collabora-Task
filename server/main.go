@@ -1,14 +1,20 @@
 package main
 
 import (
+	"asofianidis/collaboraTask/database"
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/joho/godotenv"
+	"gorm.io/gorm"
 
 	"log"
 )
+
+var DB *gorm.DB
 
 func main() {
 	app := fiber.New()
@@ -24,6 +30,15 @@ func main() {
 	if err != nil {
 		log.Fatal("Err loading .env file")
 	}
+
+	db, dbErr := database.ConnectToDatabase()
+
+	if dbErr != nil {
+		log.Fatal("Error connecting to database")
+	}
+
+	DB = db
+	fmt.Println("Connected to database")
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
