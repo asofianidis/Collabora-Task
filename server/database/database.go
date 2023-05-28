@@ -1,6 +1,7 @@
 package database
 
 import (
+	model "asofianidis/collaboraTask/database/models"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -12,4 +13,11 @@ func ConnectToDatabase() (*gorm.DB, error) {
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	return db, err
+}
+
+func MigrateModels(db *gorm.DB) {
+	db.AutoMigrate(&model.Comment{})
+	db.AutoMigrate(&model.Task{})
+	db.AutoMigrate(&model.Workspace{})
+	db.AutoMigrate(&model.User{})
 }

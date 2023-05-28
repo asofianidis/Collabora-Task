@@ -32,6 +32,7 @@ func main() {
 	}
 
 	db, dbErr := database.ConnectToDatabase()
+	database.MigrateModels(db)
 
 	if dbErr != nil {
 		log.Fatal("Error connecting to database")
@@ -39,12 +40,6 @@ func main() {
 
 	DB = db
 	fmt.Println("Connected to database")
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{
-			"hello": "Hello World",
-		})
-	})
 
 	app.Listen(":8080")
 }
