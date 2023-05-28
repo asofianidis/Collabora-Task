@@ -30,7 +30,7 @@ CollaboraTask is a web-based task management application designed for teams and 
 
 To get started with CollaboraTask, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-repo.git`
+1. Clone the repository: `git clone https://github.com/asofianidis/Collabora-Task.git`
 2. Install dependencies on the client: `npm install`
 3. Configure the database connection go backend in a .env file
 4. Start the go server: `go run .`
